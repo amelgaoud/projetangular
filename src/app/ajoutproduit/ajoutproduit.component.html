@@ -1,0 +1,78 @@
+<div class="card">
+  <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              1 Personal Information
+          </button>
+      </h5>
+  </div>
+  <button (click)="showToaster()">
+    Show Toaster
+</button>
+  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+      data-parent="#accordion">
+      <div class="card-body">
+          <form [formGroup]="registerForm"  (ngSubmit)="ajoutproduit()" class="personal-information">
+
+
+
+              <div class="form-group row">
+                  <label for="firstname" class="col-md-3 col-form-label">First
+                      name</label>
+                  <div class="col-md-6">
+                      <input type="text" id="firstname" formControlName="nom" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.nom.errors }">
+                      <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                        <div *ngIf="f.nom.errors.required">name is required</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label for="lastname" class="col-md-3 col-form-label">prix</label>
+                  <div class="col-md-6">
+                      <input type="number" id="lastname" class="form-control" formControlName="prix"
+                       class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.prix.errors }">
+                      <div *ngIf="submitted && f.prix.errors" class="invalid-feedback">
+                        <div *ngIf="f.prix.errors.required">price  is required</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label  class="col-md-3 col-form-label">Photo</label>
+                  <div class="col-md-6">
+                      <input type="file" (change)="handleFileInput($event.target.files)"
+                      formControlName="image" class="form-control">
+
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <label  class="col-md-3 col-form-label">categorie</label>
+                  <div class="col-md-6">
+                      <div class="input-group mb-2 mr-sm-2">
+                          <select  class="form-control"
+                          formControlName="categorie"
+                      [ngClass]="{ 'is-invalid': submitted && f.categorie.errors }">
+
+                      <option value={{c.id}} *ngFor="let c of listcategorie">{{c.nom}}</option>
+
+                      </select>
+
+                      <div *ngIf="submitted && f.categorie.errors" class="invalid-feedback">
+                        <div *ngIf="f.categorie.errors.required">categorie is required</div>
+                                          </div>
+
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                  <button class="btn btn-info" type="submit">add</button></div>
+              </div>
+
+
+
+          </form>
+      </div>
+  </div>
+</div>
